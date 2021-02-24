@@ -1,5 +1,11 @@
 ### 使用Alpine 安装 homeAssistant
 
+修改源
+```
+sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+```
+
+
 创建requirements.txt文件
 
 ```
@@ -71,6 +77,7 @@ pyotp==2.3.0
 apk add --no-cache git mariadb-connector-c-dev python3 py3-pip ca-certificates libffi-dev libssl1.1 libressl-dev && \
     pip3 install --upgrade --no-cache-dir pip && \
     apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata mariadb-dev && \
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple && \
     pip3 install --no-cache-dir homeassistant && \
     pip3 install --no-cache-dir -r requirements.txt --use-feature=2020-resolver
 ```
