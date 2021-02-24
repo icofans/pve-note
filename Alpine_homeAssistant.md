@@ -74,4 +74,36 @@ apk add --no-cache git mariadb-connector-c-dev python3 py3-pip ca-certificates l
     pip3 install --no-cache-dir homeassistant && \
     pip3 install --no-cache-dir -r requirements.txt --use-feature=2020-resolver
 ```
-清除
+
+安装后运行
+
+```
+hass --open-ui
+```
+
+发现报错,缺少pillow库
+
+踩坑: 安装pillow需安装依赖
+
+```
+apk --update add libxml2-dev libxslt-dev libffi-dev gcc musl-dev libgcc openssl-dev curl
+apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
+pip3 install Pillow==8.1.0
+```
+
+再次运行
+```
+ERROR (MainThread) [homeassistant.components.dhcp] Cannot watch for dhcp packets without a functional packet filter: libpcap is not available. Cannot compile filter !
+```
+还缺少libpcap 安装
+
+```
+apk add libpcap
+```
+
+至此成功,卸载依赖
+```
+apk del build-dependencies && \
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+```
+
