@@ -1,1 +1,77 @@
 ### 使用Alpine 安装 homeAssistant
+
+创建requirements.txt文件
+
+```
+# Home Assistant core
+aiohttp==3.7.3
+astral==1.10.1
+async_timeout==3.0.1
+attrs==19.3.0
+awesomeversion==21.2.2
+bcrypt==3.1.7
+certifi>=2020.12.5
+ciso8601==2.1.3
+httpx==0.16.1
+jinja2>=2.11.3
+PyJWT==1.7.1
+cryptography==3.2
+pip>=8.0.3,<20.3
+python-slugify==4.0.1
+pytz>=2021.1
+pyyaml==5.4.1
+requests==2.25.1
+ruamel.yaml==0.15.100
+voluptuous==0.12.1
+voluptuous-serialize==2.4.0
+yarl==1.6.3
+
+
+#Mobile App
+PyNaCl==1.3.0
+hass-nabucasa
+
+#MySQL
+mysqlclient
+
+# MariaDB
+pymysql
+
+# homeassistant.components.frontend
+home-assistant-frontend
+
+# homeassistant.components.homekit
+HAP-python==3.3.0
+
+# homeassistant.components.http
+aiohttp_cors==0.7.0
+
+# homeassistant.components.media_player.gpmdp
+websocket-client==0.54.0
+
+# homeassistant.components.mqtt
+paho-mqtt==1.5.1
+
+# homeassistant.components.notify.html5
+pywebpush==1.9.2
+
+# homeassistant.components.cast
+pychromecast==8.1.0
+
+# homeassistant.components.zeroconf
+zeroconf==0.28.8
+
+# homeassistant.components.otp
+pyotp==2.3.0
+
+```
+安装
+
+```
+apk add --no-cache git mariadb-connector-c-dev python3 py3-pip ca-certificates libffi-dev libssl1.1 libressl-dev && \
+    pip3 install --upgrade --no-cache-dir pip && \
+    apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata mariadb-dev && \
+    pip3 install --no-cache-dir homeassistant && \
+    pip3 install --no-cache-dir -r requirements.txt --use-feature=2020-resolver
+```
+清除
